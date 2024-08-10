@@ -23,7 +23,12 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://client-application-omega.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 app.use("/api/posts", postRoute);
 
