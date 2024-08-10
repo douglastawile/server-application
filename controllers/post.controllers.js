@@ -26,13 +26,12 @@ const createPost = async (req, res) => {
   try {
     await newPost.save();
     res.status(201).json({
-      status: success,
       message: "Post created successfully",
       post: newPost,
     });
   } catch (error) {
     console.error(error);
-    return res.status(400).json({ status: failure, error: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 
@@ -42,7 +41,7 @@ const getAllPosts = async (req, res) => {
     res.status(200).json(posts);
   } catch (error) {
     console.error(error);
-    return res.status(400).json({ status: failure, error: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 
@@ -52,21 +51,20 @@ const getSinglePost = async (req, res) => {
     return res.status(200).json(post);
   } catch (error) {
     console.error(error);
-    return res.status(400).json({ status: failure, error: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 
 const updatePost = async (req, res) => {
   try {
-    const post = await Post.findByIdAndUpdate(req.post._id);
+    const post = await Post.findByIdAndUpdate(req.post._id, req.body, {new: true, runValidators: true});
     return res.status(200).json({
-      status: success,
       message: "Post updated successfully",
       post,
     });
   } catch (error) {
     console.error(error);
-    return res.status(400).json({ status: failure, error: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 
@@ -74,13 +72,12 @@ const deletePost = async (req, res) => {
   try {
     const post = await Post.findByIdAndDelete(req.post._id);
     return res.status(200).json({
-      status: success,
       message: "Post deleted successfully",
       post,
     });
   } catch (error) {
     console.error(error);
-    return res.status(400).json({ status: failure, error: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 
