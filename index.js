@@ -31,12 +31,13 @@ app.get("/", (req, res) => {
   res.send("Server API Setting Up...");
 });
 
+connectDB();
+
 app.listen(PORT, (error) => {
   if (error) {
     console.error(error);
   } else {
     console.log(`Server running...`);
-    connectDB();
   }
 });
 
