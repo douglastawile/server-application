@@ -13,4 +13,6 @@ router
   .put(postControllers.updatePost)
   .delete(postControllers.deletePost);
 
+router.param("postId", postControllers.postByID);
+
 export default router;
