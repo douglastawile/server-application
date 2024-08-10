@@ -15,4 +15,4 @@ router
 
 router.param("postId", postControllers.postByID);
 
-export default router;
+export default router
